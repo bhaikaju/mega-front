@@ -1,0 +1,193 @@
+<!-- SECTION -->
+<div class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+      <!-- shop -->
+      <div class="col-md-4 col-xs-6">
+        <div class="shop">
+          <div class="shop-img">
+            <img src="./../../../assets/img/shop01.png" alt="">
+          </div>
+          <div class="shop-body">
+            <h3>Laptop<br>Collection</h3>
+            <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- /shop -->
+
+      <!-- shop -->
+      <div class="col-md-4 col-xs-6">
+        <div class="shop">
+          <div class="shop-img">
+            <img src="./../../../assets/img/shop03.png" alt="">
+          </div>
+          <div class="shop-body">
+            <h3>Accessories<br>Collection</h3>
+            <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- /shop -->
+
+      <!-- shop -->
+      <div class="col-md-4 col-xs-6">
+        <div class="shop">
+          <div class="shop-img">
+            <img src="./../../../assets/img/shop02.png" alt="">
+          </div>
+          <div class="shop-body">
+            <h3>Cameras<br>Collection</h3>
+            <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- /shop -->
+    </div>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- SECTION -->
+<div class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+
+      <!-- section title -->
+      <div class="col-md-12">
+        <div class="section-title">
+          <h3 class="title">New Products</h3>
+        </div>
+      </div>
+      <!-- /section title -->
+
+      <!-- Products tab & slick -->
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-4 col-sm-6" *ngFor="let p of products">
+            <div class="card my-2">
+              <img [src]="p.image" alt="{{p.name}}" width="200px" class="card-img-top" (click)="selectProduct(p.id)" style="cursor:pointer;">
+              <div class="card-header">
+                <div class="card-title">
+                  <p>{{p.name | titlecase}}</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <h6>{{p.description.substr(0, 40)}} ....</h6>
+                <p class="lead">{{p.price | currency:'USD'}}</p>
+              </div>
+
+              <div class="row d-flex justify-content-center border-primary my-3">
+                <div class="col-md-6 ">
+                  <button class="btn btn-outline-primary btn-sm btn-block"
+                          [class.disabled]="p.quantity < 1"
+                          [class.btn-outline-danger]="p.quantity < 1"
+                          (click)="AddProduct(p.id)" [disabled]="p.quantity < 1">
+                    {{ p.quantity < 1 ? "NO STOCK" : "Add To Cart"}}
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- /container -->
+
+<!-- /SECTION -->
+
+<!-- HOT DEAL SECTION -->
+<div id="hot-deal" class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="hot-deal">
+          <ul class="hot-deal-countdown">
+            <li>
+              <div>
+                <h3>02</h3>
+                <span>Days</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <h3>10</h3>
+                <span>Hours</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <h3>34</h3>
+                <span>Mins</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <h3>60</h3>
+                <span>Secs</span>
+              </div>
+            </li>
+          </ul>
+          <h2 class="text-uppercase">hot deal this week</h2>
+          <p>New Collection Up to 50% OFF</p>
+          <a class="primary-btn cta-btn" href="#">Shop now</a>
+        </div>
+      </div>
+    </div>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</div>
+<!-- /HOT DEAL SECTION -->
+
+
+<!-- NEWSLETTER -->
+<div id="newsletter" class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="newsletter">
+          <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+          <form>
+            <input class="input" type="email" placeholder="Enter Your Email">
+            <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+          </form>
+          <ul class="newsletter-follow">
+            <li>
+              <a href="#"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-pinterest"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</div>
+<!-- /NEWSLETTER -->
