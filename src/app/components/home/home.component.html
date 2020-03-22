@@ -79,6 +79,23 @@
                   <p>{{p.name | titlecase}}</p>
                 </div>
               </div>
+              <div class="card-body">
+                <h6>{{p.description.substr(0, 25)}} ...</h6>
+                <p class="lead">{{p.price | currency:'GBP'}}</p>
+              </div>
+
+              <div class="row d-flex justify-content-center border-primary my-3">
+                <div class="col-md-6">
+                  <button class="btn btn-outline-primary btn-sm btn-block"
+                  [class.disabled]="p.quantity < 1"
+                  [class.btn-outline-danger]="p.quantity < 1"
+                  >
+                    {{ p.quantity < 1 ? "NO STOCK" : "Add To Cart"}}
+                  </button>
+                </div>
+              </div>
+
+
             </div>
           </div>
         </div>
