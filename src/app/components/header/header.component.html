@@ -66,24 +66,24 @@
               <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="cursor:pointer;">
                 <i class="fa fa-shopping-cart"></i>
                 <span>Your Cart</span>
-                <div class="qty">0</div>
+                <div class="qty">{{cartData.data[0].numInCart !== 0 ? cartData.data.length : 0}}</div>
               </a>
               <div class="cart-dropdown">
-                <div class="cart-list">
-                  <div class="product-widget">
+                <div class="cart-list" *ngIf="cartData.data[0].numInCart !== 0">
+                  <div class="product-widget" *ngFor="let c of cartData.data; let i=index">
                     <div class="product-img">
-                      <img src="./img/product01.png" alt="">
+                      <img [src]="c.product?.image" alt="{{c.product.name}}" width="20px">
                     </div>
                     <div class="product-body">
-                      <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                      <h4 class="product-price"><span class="qty">1x</span>0</h4>
+                      <h3 class="product-name"><a href="#">{{c.product.name}}</a></h3>
+                      <h4 class="product-price"><span class="qty">{{c.numInCart}} x </span> {{c.product?.price | currency:'USD'}} </h4>
                     </div>
-                    <button class="delete"><i class="fa fa-close"></i></button>
+                    <button class="delete" (click)="cartService.DeleteProductFromCart(i)"><i class="fa fa-close"></i></button>
                   </div>
                 </div>
                 <div class="cart-summary">
-                  <small>3 Item(s) selected</small>
-                  <h5>SUBTOTAL: {{ 0 | currency:'USD'}}</h5>
+                  <small>{{cartData.data[0].numInCart !== 0 ? cartData.data.length : 0}} Item(s) selected</small>
+                  <h5>TOTAL: {{ cartTotal | currency:'USD'}}</h5>
                 </div>
                 <div class="cart-btns">
                   <a routerLink="/cart">View Cart</a>

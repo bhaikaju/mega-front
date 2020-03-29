@@ -127,10 +127,7 @@ export class CartService {
             positionClass: 'toast-top-right'
           });
 
-        }
-        // IF product is not in the cart array
-
-        else {
+        } else {
           this.cartDataServer.data.push({
             numInCart: 1,
             product: prod
@@ -276,6 +273,16 @@ export class CartService {
     };
 
     this.cartData$.next({...this.cartDataServer});
+  }
+
+  CalculateSubTotal(index): number {
+    let subTotal = 0;
+
+    const p = this.cartDataServer.data[index];
+    // @ts-ignore
+    subTotal = p.product.price * p.numInCart;
+
+    return subTotal;
   }
 }
 
