@@ -89,6 +89,7 @@
                   <button class="btn btn-outline-primary btn-sm btn-block"
                   [class.disabled]="p.quantity < 1"
                   [class.btn-outline-danger]="p.quantity < 1"
+                  (click)="AddToCart(p.id)"
                   >
                     {{ p.quantity < 1 ? "NO STOCK" : "Add To Cart"}}
                   </button>

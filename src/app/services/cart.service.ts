@@ -7,6 +7,8 @@ import {CartModelPublic, CartModelServer} from '../models/cart.model';
 import {BehaviorSubject} from 'rxjs';
 import {NavigationExtras, Router} from '@angular/router';
 import {ProductModelServer} from '../models/product.model';
+import {ToastrService} from 'ngx-toastr';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +42,9 @@ export class CartService {
   constructor(private http: HttpClient,
               private productService: ProductService,
               private orderService: OrderService,
-              private router: Router) {
+              private router: Router,
+              private toast: ToastrService,
+              private spinner: NgxSpinnerService) {
 
     this.cartTotal$.next(this.cartDataServer.total);
     this.cartData$.next(this.cartDataServer);
@@ -93,25 +97,39 @@ export class CartService {
         this.cartDataClient.total = this.cartDataServer.total;
         localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
         this.cartData$.next({...this.cartDataServer});
-        //  TODO DISPLAY A TOAST NOTIFICATION
-      }
-      //  2.  If the cart has some items
-      else {
-        let index = this.cartDataServer.data.findIndex(p => p.product.id === prod.id);  // -1 or a positive value
+        this.toast.success(`${prod.name} added to the cart`, 'Product Added', {
+          timeOut: 1500,
+          progressBar: true,
+          progressAnimation: 'increasing',
+          positionClass: 'toast-top-right'
+        });
+
+      } else {
+        const index = this.cartDataServer.data.findIndex(p => p.product.id === prod.id);  // -1 or a positive value
 
         //     a. if that item is already in the cart  =>  index is positive value
         if (index !== -1) {
           if (quantity !== undefined && quantity <= prod.quantity) {
             this.cartDataServer.data[index].numInCart = this.cartDataServer.data[index].numInCart < prod.quantity ? quantity : prod.quantity;
           } else {
-            this.cartDataServer.data[index].numInCart = this.cartDataServer.data[index].numInCart < prod.quantity ? this.cartDataServer.data[index].numInCart++ : prod.quantity;
+            // tslint:disable-next-line:no-unused-expression
+            this.cartDataServer.data[index].numInCart < prod.quantity ? this.cartDataServer.data[index].numInCart++ : prod.quantity;
           }
 
           this.cartDataClient.prodData[index].incart = this.cartDataServer.data[index].numInCart;
-          //  TODO DISPLAY A TOAST NOTIFICATION
+          this.CalculateTotal();
+          this.cartDataClient.total = this.cartDataServer.total;
+          localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
+          this.toast.info(`${prod.name} quantity updated in the cart`, 'Product Updated', {
+            timeOut: 1500,
+            progressBar: true,
+            progressAnimation: 'increasing',
+            positionClass: 'toast-top-right'
+          });
 
-        }  // END OF IF
-        //     b. if that item is not in the cart
+        }
+        // IF product is not in the cart array
+
         else {
           this.cartDataServer.data.push({
             numInCart: 1,
@@ -122,8 +140,12 @@ export class CartService {
             incart: 1,
             id: prod.id
           });
-
-          //  TODO DISPLAY A TOAST NOTIFICATION
+          this.toast.success(`${prod.name} added to the cart`, 'Product Added', {
+            timeOut: 1500,
+            progressBar: true,
+            progressAnimation: 'increasing',
+            positionClass: 'toast-top-right'
+          });
 
           this.CalculateTotal();
           this.cartDataClient.total = this.cartDataServer.total;
@@ -135,7 +157,7 @@ export class CartService {
   }
 
   UpdateCartItems(index: number, increase: boolean) {
-    let data = this.cartDataServer.data[index];
+    const data = this.cartDataServer.data[index];
 
     if (increase) {
       data.numInCart < data.product.quantity ? data.numInCart++ : data.product.quantity;
@@ -194,7 +216,7 @@ export class CartService {
 
         this.resetServerData();
         this.http.post(`${this.serverURL}/orders/new`, {
-          userId: userId,
+          userId,
           products: this.cartDataClient.prodData
         }).subscribe((data: OrderResponse) => {
           this.orderService.getSingleOrder(data.order_id).then(prods => {
@@ -208,7 +230,7 @@ export class CartService {
                 }
               };
 
-              // TODO HIDE SPINNER
+              this.spinner.hide().then();
               this.router.navigate(['/thankyou'], navigationExtras).then(p => {
                 this.cartDataClient = {total: 0, prodData: [{incart: 0, id: 0}]};
                 this.cartTotal$.next(0);
@@ -216,6 +238,15 @@ export class CartService {
               });
             }
           });
+        });
+      } else {
+        this.spinner.hide().then();
+        this.router.navigateByUrl('/checkout').then();
+        this.toast.error(`Sorry, failed to book the order`, 'Order Status', {
+          timeOut: 1500,
+          progressBar: true,
+          progressAnimation: 'increasing',
+          positionClass: 'toast-top-right'
         });
       }
     });
