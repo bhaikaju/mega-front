@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CartService} from '../../services/cart.service';
 import {OrderService} from '../../services/order.service';
 import {Router} from '@angular/router';
@@ -12,15 +12,16 @@ import {CartModelServer} from '../../models/cart.model';
 })
 export class CheckoutComponent implements OnInit {
 
-   cartTotal: number;
-   cartData: CartModelServer;
+  cartTotal: number;
+  cartData: CartModelServer;
 
 
   constructor(private cartService: CartService,
               private orderService: OrderService,
               private router: Router,
               private spinner: NgxSpinnerService
-              ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.cartService.cartData$.subscribe(data => this.cartData = data);
@@ -30,8 +31,14 @@ export class CheckoutComponent implements OnInit {
   }
 
   onCheckout() {
-     this.spinner.show().then(p => {
-       this.cartService.CheckoutFromCart(2);
-     });
+    if (this.cartTotal > 0) {
+      this.spinner.show().then(p => {
+        this.cartService.CheckoutFromCart(2);
+      });
+    } else {
+      return;
+    }
+
+
   }
 }
