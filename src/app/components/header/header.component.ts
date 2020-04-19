@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CartModelServer} from '../../models/cart.model';
 import {CartService} from '../../services/cart.service';
-import {AuthService, SocialUser} from 'angularx-social-login';
 import {UserService} from '../../services/user.service';
 
 @Component({
@@ -13,10 +12,9 @@ export class HeaderComponent implements OnInit {
   cartData: CartModelServer;
   cartTotal: number;
   authState: boolean;
-
   constructor(public cartService: CartService,
-              private userService: UserService) {
-    this.authState = false;
+              private userService: UserService
+  ) {
   }
 
   ngOnInit(): void {
@@ -24,11 +22,7 @@ export class HeaderComponent implements OnInit {
 
     this.cartService.cartData$.subscribe(data => this.cartData = data);
 
-    this.userService.authState$.subscribe(auth =>  {
-      console.log(auth);
-      this.authState = auth;
-    });
-
+    this.userService.authState$.subscribe(authState => this.authState = authState);
   }
 
 }

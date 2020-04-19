@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {NgForm} from '@angular/forms';
 import {AuthService} from 'angularx-social-login';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NgForm} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 
 @Component({
@@ -10,14 +10,13 @@ import {UserService} from '../../services/user.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  email: string;
-  password: string;
+   email: string;
+   password: string;
 
   constructor(private authService: AuthService,
               private router: Router,
               private userService: UserService,
-              private route: ActivatedRoute) {
-  }
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.userService.authState$.subscribe(authState => {
@@ -27,6 +26,8 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/login');
       }
     });
+
+
   }
 
   signInWithGoogle() {
@@ -34,15 +35,14 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: NgForm) {
-
     const email = this.email;
     const password = this.password;
 
     if (form.invalid) {
       return;
     }
-    form.reset();
 
+    form.reset();
     this.userService.loginUser(email, password);
   }
 }

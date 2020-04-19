@@ -14,19 +14,18 @@ import {ThankyouComponent} from './components/thankyou/thankyou.component';
 import {HttpClientModule} from '@angular/common/http';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {ToastrModule} from 'ngx-toastr';
-import {LoginComponent} from './components/login/login.component';
-import {RegisterComponent} from './components/register/register.component';
-import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angularx-social-login';
-import { ProfileComponent } from './components/profile/profile.component';
 import {FormsModule} from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angularx-social-login';
 
-let config = new AuthServiceConfig([
+const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
     provider: new GoogleLoginProvider('799705726167-vn6184fsovmps0kpbg5c7jabv15r3ias.apps.googleusercontent.com')
   }
-]);
 
+]);
 export function provideConfig() {
   return config;
 }
@@ -42,7 +41,6 @@ export function provideConfig() {
     ProductComponent,
     ThankyouComponent,
     LoginComponent,
-    RegisterComponent,
     ProfileComponent
   ],
   imports: [
@@ -53,8 +51,8 @@ export function provideConfig() {
     HttpClientModule,
     NgxSpinnerModule,
     ToastrModule.forRoot(),
-    SocialLoginModule,
-    FormsModule
+    FormsModule,
+    SocialLoginModule
   ],
   providers: [
     {

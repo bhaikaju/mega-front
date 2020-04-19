@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
 import {ProductComponent} from './components/product/product.component';
 import {CartComponent} from './components/cart/cart.component';
@@ -21,7 +21,7 @@ const routes: Routes = [
     path: 'cart', component: CartComponent
   },
   {
-    path: 'checkout', component: CheckoutComponent, canActivate: [ProfileGuard]
+    path: 'checkout', component: CheckoutComponent
   },
   {
     path: 'thankyou', component: ThankyouComponent
@@ -30,12 +30,14 @@ const routes: Routes = [
     path: 'login', component: LoginComponent
   },
   {
-    path: 'profile', component: ProfileComponent, canActivate: [ProfileGuard]
+    path: 'profile', component: ProfileComponent, canActivate:[ProfileGuard]
   }
+
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
