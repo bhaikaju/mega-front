@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-md-6 d-flex mx-auto flex-column">
+        <form novalidate #myform="ngForm">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input class="form-control" id="email" type="email" [(ngModel)]="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input class="form-control" id="password" type="password" [(ngModel)]="password" name="password" required>
+          </div>
+          <div class="d-flex flex-column align-items-center justify-content-around">
+            <button class="btn btn-primary btn-sm btn-block" (click)="login(myform)" [disabled]="myform.invalid && myform.touched">Login</button>
+            <hr>
+            <h4 class="text-uppercase"><strong>Login Using</strong></h4>
+
+            <button (click)="signInWithGoogle()" class="btn btn-danger btn-sm btn-block mt-4"><span><i
+              class="fa fa-google"></i> Google </span>
+            </button>
+          </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</div>

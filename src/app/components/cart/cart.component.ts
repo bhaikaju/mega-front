@@ -12,6 +12,7 @@ export class CartComponent implements OnInit {
   cartTotal: number;
   subTotal: number;
 
+
   constructor(public cartService: CartService) {
   }
 

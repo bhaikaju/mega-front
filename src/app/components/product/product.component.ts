@@ -79,7 +79,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
     });
 
     // Product img zoom
-    var zoomMainProduct = document.getElementById('product-main-img');
+    // tslint:disable-next-line:prefer-const
+    const zoomMainProduct = document.getElementById('product-main-img');
     if (zoomMainProduct) {
       $('#product-main-img .product-preview').zoom();
     }
