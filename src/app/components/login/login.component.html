@@ -2,6 +2,11 @@
   <div class="jumbotron">
     <div class="row">
       <div class="col-md-6 d-flex mx-auto flex-column">
+        <ng-container *ngIf="loginMessage?.length > 0">
+          <div class="alert alert-danger alert-dismissible text-center">
+            {{loginMessage}}
+          </div>
+        </ng-container>
         <form novalidate #myform="ngForm">
           <div class="form-group">
             <label for="email">Email</label>

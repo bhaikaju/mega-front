@@ -9,7 +9,8 @@
         <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
       </ul>
       <ul class="header-links pull-right">
-        <li><a routerLink="/profile"><i class="fa fa-user-o"></i> {{authState === false ? 'LOGIN' : 'My Account'}}</a></li>
+        <li><a routerLink="/profile"><i class="fa fa-sign-in"></i> {{authState === false ? 'LOGIN' : 'My Account'}}</a></li>
+        <li *ngIf="!authState"><a routerLink="/register"><i class="fa fa-user-plus"></i> REGISTER</a></li>
       </ul>
     </div>
   </div>

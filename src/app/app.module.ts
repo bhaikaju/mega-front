@@ -14,10 +14,11 @@ import {ThankyouComponent} from './components/thankyou/thankyou.component';
 import {HttpClientModule} from '@angular/common/http';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {ToastrModule} from 'ngx-toastr';
-import {FormsModule} from '@angular/forms';
-import { LoginComponent } from './components/login/login.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import {EmailValidator, FormsModule, NG_ASYNC_VALIDATORS, ReactiveFormsModule} from '@angular/forms';
+import {LoginComponent} from './components/login/login.component';
+import {ProfileComponent} from './components/profile/profile.component';
 import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angularx-social-login';
+import {RegisterComponent} from './components/register/register.component';
 
 const config = new AuthServiceConfig([
   {
@@ -26,6 +27,7 @@ const config = new AuthServiceConfig([
   }
 
 ]);
+
 export function provideConfig() {
   return config;
 }
@@ -41,7 +43,8 @@ export function provideConfig() {
     ProductComponent,
     ThankyouComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ export function provideConfig() {
     NgxSpinnerModule,
     ToastrModule.forRoot(),
     FormsModule,
+    ReactiveFormsModule,
     SocialLoginModule
   ],
   providers: [
