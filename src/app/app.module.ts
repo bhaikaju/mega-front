@@ -1,24 +1,26 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
+import {AppRoutingModule} from '@app/app-routing.module';
+import {AppComponent} from '@app/app.component';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {HeaderComponent} from './components/header/header.component';
-import {FooterComponent} from './components/footer/footer.component';
-import {CartComponent} from './components/cart/cart.component';
-import {CheckoutComponent} from './components/checkout/checkout.component';
-import {HomeComponent} from './components/home/home.component';
-import {ProductComponent} from './components/product/product.component';
-import {ThankyouComponent} from './components/thankyou/thankyou.component';
+import {HeaderComponent} from '@app/components/header/header.component';
+import {FooterComponent} from '@app/components/footer/footer.component';
+import {CartComponent} from '@app/components/cart/cart.component';
+import {CheckoutComponent} from '@app/components/checkout/checkout.component';
+import {HomeComponent} from '@app/components/home/home.component';
+import {ProductComponent} from '@app/components/product/product.component';
+import {ThankyouComponent} from '@app/components/thankyou/thankyou.component';
 import {HttpClientModule} from '@angular/common/http';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {ToastrModule} from 'ngx-toastr';
-import {EmailValidator, FormsModule, NG_ASYNC_VALIDATORS, ReactiveFormsModule} from '@angular/forms';
-import {LoginComponent} from './components/login/login.component';
-import {ProfileComponent} from './components/profile/profile.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {LoginComponent} from '@app/components/login/login.component';
+import {ProfileComponent} from '@app/components/profile/profile.component';
 import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angularx-social-login';
-import {RegisterComponent} from './components/register/register.component';
+import {RegisterComponent} from '@app/components/register/register.component';
+import {HomeLayoutComponent} from '@app/components/home-layout/home-layout.component';
+
 
 const config = new AuthServiceConfig([
   {
@@ -44,7 +46,8 @@ export function provideConfig() {
     ThankyouComponent,
     LoginComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeLayoutComponent
   ],
   imports: [
     BrowserModule,

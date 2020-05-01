@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   cartTotal: number;
   authState: boolean;
   constructor(public cartService: CartService,
-              private userService: UserService
+              public userService: UserService
   ) {
   }
 

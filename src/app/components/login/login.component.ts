@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {AuthService} from 'angularx-social-login';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -9,10 +9,11 @@ import {UserService} from '../../services/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   email: string;
   password: string;
   loginMessage: string;
+  userRole: number;
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -23,11 +24,14 @@ export class LoginComponent implements OnInit{
   ngOnInit(): void {
     this.userService.authState$.subscribe(authState => {
       if (authState) {
-        this.router.navigateByUrl(this.route.snapshot.queryParams['returnUrl'] || '/profile');
+        this.router.navigateByUrl(this.route.snapshot.queryParams.returnUrl || '/profile');
+
       } else {
         this.router.navigateByUrl('/login');
       }
     });
+
+
   }
 
 
