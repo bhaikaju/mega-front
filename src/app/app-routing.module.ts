@@ -10,6 +10,7 @@ import {ProfileGuard} from './guard/profile.guard';
 import {RegisterComponent} from './components/register/register.component';
 import {HomeComponent} from './components/home/home.component';
 import {HomeLayoutComponent} from './components/home-layout/home-layout.component';
+import {AdminComponent} from '@app/components/admin/admin.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,9 @@ const routes: Routes = [
         path: 'register', component: RegisterComponent
       },
     ]
+  },
+  {
+    path: 'admin', component: AdminComponent
   },
   // Wildcard Route if no route is found == 404 NOTFOUND page
   {
