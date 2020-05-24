@@ -16,6 +16,7 @@ export class CheckoutComponent implements OnInit {
   cartTotal: number;
   cartData: CartModelServer;
   userId;
+  model: any = {};
 
   constructor(private cartService: CartService,
               private orderService: OrderService,
@@ -46,5 +47,9 @@ export class CheckoutComponent implements OnInit {
     }
 
 
+  }
+
+  formSubmit() {
+    console.log(this.model);
   }
 }
