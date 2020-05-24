@@ -45,8 +45,6 @@ const routes: Routes = [
       },
     ]
   },
-
-
   // Wildcard Route if no route is found == 404 NOTFOUND page
   {
     path: '**', pathMatch: 'full', redirectTo: ''
